@@ -4,13 +4,13 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 7ae36a5dc4e5b67893ccf3498f7fba2b0cf71e0c24ac23f5827d573ada95816c
+-- hash: b1eccd759c230d2306f4cfdf9db194d86ab0fe5bbd432df3d2f81a0bffa3747a
 
 name:           aoc2020
 version:        0.1.0.0
-description:    Please see the README on GitHub at <https://github.com/githubuser/Advent-of-Code-2020#readme>
-homepage:       https://github.com/githubuser/Advent-of-Code-2020#readme
-bug-reports:    https://github.com/githubuser/Advent-of-Code-2020/issues
+description:    Please see the README on GitHub at <https://github.com/emiflake/Advent-of-Code-2020#readme>
+homepage:       https://github.com/emiflake/Advent-of-Code-2020#readme
+bug-reports:    https://github.com/emiflake/Advent-of-Code-2020/issues
 author:         Emily Martins
 maintainer:     emily.flakeheart@gmail.com
 copyright:      2020 Emily Martins
@@ -19,21 +19,40 @@ license-file:   LICENSE
 build-type:     Simple
 extra-source-files:
     README.md
-    ChangeLog.md
 
 source-repository head
   type: git
-  location: https://github.com/githubuser/Advent-of-Code-2020
+  location: https://github.com/emiflake/Advent-of-Code-2020
 
 library
   exposed-modules:
-      Lib
+      AOC.Common.Day
+      AOC.Common.Parser
+      AOC.Common.ParseTools
+      AOC.Common.Prelude
+      AOC.Day01
   other-modules:
       Paths_aoc2020
   hs-source-dirs:
       src
+  default-extensions: OverloadedStrings
   build-depends:
-      base >=4.7 && <5
+      QuickCheck
+    , base >=4.7 && <5
+    , containers
+    , exceptions
+    , ghc-prim
+    , hspec
+    , lens
+    , megaparsec
+    , mtl
+    , optparse-applicative
+    , parser-combinators
+    , prettyprinter ==1.7.*
+    , prettyprinter-ansi-terminal
+    , text
+    , transformers
+    , vector
   default-language: Haskell2010
 
 executable aoc2020-exe
@@ -42,10 +61,26 @@ executable aoc2020-exe
       Paths_aoc2020
   hs-source-dirs:
       app
+  default-extensions: OverloadedStrings
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      aoc2020
+      QuickCheck
+    , aoc2020
     , base >=4.7 && <5
+    , containers
+    , exceptions
+    , ghc-prim
+    , hspec
+    , lens
+    , megaparsec
+    , mtl
+    , optparse-applicative
+    , parser-combinators
+    , prettyprinter ==1.7.*
+    , prettyprinter-ansi-terminal
+    , text
+    , transformers
+    , vector
   default-language: Haskell2010
 
 test-suite aoc2020-test
@@ -55,8 +90,24 @@ test-suite aoc2020-test
       Paths_aoc2020
   hs-source-dirs:
       test
+  default-extensions: OverloadedStrings
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      aoc2020
+      QuickCheck
+    , aoc2020
     , base >=4.7 && <5
+    , containers
+    , exceptions
+    , ghc-prim
+    , hspec
+    , lens
+    , megaparsec
+    , mtl
+    , optparse-applicative
+    , parser-combinators
+    , prettyprinter ==1.7.*
+    , prettyprinter-ansi-terminal
+    , text
+    , transformers
+    , vector
   default-language: Haskell2010

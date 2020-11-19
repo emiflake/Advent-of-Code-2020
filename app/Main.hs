@@ -1,6 +1,8 @@
 module Main where
 
-import Lib
+import AOC.Common.Prelude
+import AOC.Day01 as Day01
 
 main :: IO ()
-main = someFunc
+main =
+  runDay 1 Day01.today
