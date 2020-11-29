@@ -1,4 +1,4 @@
-module AOC.Day01 where
+module AOC.Day00 where
 
 import AOC.Common.Prelude
 
@@ -8,4 +8,4 @@ today =
     (integer `sepBy` symbol ",")
     sum
     product
-    "inputs/day01.txt"
+    "inputs/day00.txt"
