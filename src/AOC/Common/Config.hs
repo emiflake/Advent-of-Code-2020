@@ -3,9 +3,11 @@ module AOC.Common.Config where
 import Options.Applicative
 import Data.Semigroup ((<>))
 
+import Data.Text (Text)
+
 data Goal
   = All
-  | SpecificDay Int (Maybe FilePath)
+  | SpecificDay Int (Maybe FilePath) (Maybe Text)
   deriving (Show, Eq)
 
 data Config =
@@ -48,6 +50,11 @@ specificDay =
                <> short 'f'
                <> metavar "FILENAME"
                <> help "Input file" ))
+  <*> optional (strOption
+                ( long "extra"
+               <> short 'e'
+               <> metavar "EXTRA-COMMAND"
+               <> help "Extra command, for example 'visual' or maybe even benchmark, etc etc. Some scripting?" ))
 
 parseGoal :: Parser Goal
 parseGoal =

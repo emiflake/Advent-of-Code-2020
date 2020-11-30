@@ -10,21 +10,23 @@ import AOC.Common.Config
 import AOC.Common.Parser
 import Test.Hspec
 import Data.Void
-import qualified Data.Text (Text)
-import Data.Text as Text
+import Data.Text (Text)
+import qualified Data.Text as Text
 import Data.Text.IO as Text
 import Control.Monad (when)
+import Control.Lens ((^?), ix)
 
 import Prettyprinter
 import Prettyprinter.Render.Terminal
 
 data Day input a b =
   Day
-  { _parseInput :: Parser input
-  , _solveOne   :: input -> IO a
-  , _solveTwo   :: input -> IO b
-  , _tests      :: [SpecWith ()]
-  , _inputPath  :: FilePath
+  { _parseInput    :: Parser input
+  , _solveOne      :: input -> IO a
+  , _solveTwo      :: input -> IO b
+  , _tests         :: [SpecWith ()]
+  , _inputPath     :: FilePath
+  , _extraCommands :: [(Text, IO ())]
   }
 
 data SomeDay =
@@ -43,8 +45,9 @@ parseInput :: Text -> Day input a b -> Either (ParseErrorBundle Text Void) input
 parseInput sourceInput Day{..} =
   runMyParser _parseInput sourceInput
 
-runDay :: (Show input, Show a, Show b) => Maybe FilePath -> Flags -> Int -> Day input a b -> IO ()
-runDay maybeFile Flags{..} int day@Day{..} = do
+-- Horrible, I know.
+runDay :: (Show input, Show a, Show b) => Maybe Text -> Maybe FilePath -> Flags -> Int -> Day input a b -> IO ()
+runDay command maybeFile Flags{..} int day@Day{..} = do
   putDoc ("---" <+> annotate (color Blue) ("Day" <+> pretty int) <+> "---" <> hardline <> hardline)
   sourceInput <- Text.readFile (fromMaybe _inputPath maybeFile)
   case parseInput sourceInput day of
@@ -62,6 +65,32 @@ runDay maybeFile Flags{..} int day@Day{..} = do
         putDoc (annotate (color Yellow) "Part two: " <> hardline)
         print =<< _solveTwo v
         putDoc hardline
+
+  case command of
+    Just cmd ->
+      case lookup cmd _extraCommands of
+        Just io -> do
+          putDoc (annotate (color Red) "Running command"
+                  <+> annotate (color Yellow) (pretty cmd)
+                  <> annotate (color Red) ":"
+                  <> hardline <> hardline)
+          io
+        Nothing -> do
+          putDoc (annotate (color Red) "Command"
+                  <+> annotate (color Yellow) (pretty cmd)
+                  <+> annotate (color Red) "not found"
+                  <> hardline
+                  <> "Pick from"
+                  <+> (align
+                      . sep
+                      . zipWith (<>) (mempty : repeat ", ")
+                      . fmap (annotate (color Yellow)
+                              . pretty
+                              . fst) $ _extraCommands)
+                  <> hardline <> hardline)
+    Nothing ->
+      pure ()
+
   when flagRunTests $
     case _tests of
       [] -> putDoc (annotate (color Black) "No tests to run" <> hardline)
@@ -73,6 +102,7 @@ day :: forall input a b. (Show input, Show a, Show b)
     -> (input -> IO b)
     -> [SpecWith ()]
     -> FilePath
+    -> [(Text, IO ())]
     -> Day input a b
 day = Day
 
@@ -82,4 +112,4 @@ pureDay :: forall input a b. (Show input, Show a, Show b)
     -> (input -> b)
     -> FilePath
     -> Day input a b
-pureDay parse one two fp = Day parse (pure . one) (pure . two) [] fp
+pureDay parse one two fp = Day parse (pure . one) (pure . two) [] fp []

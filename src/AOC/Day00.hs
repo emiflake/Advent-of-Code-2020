@@ -4,8 +4,13 @@ import AOC.Common.Prelude
 
 today :: Day [Int] Int Int
 today =
-  pureDay
+  day
     (integer `sepBy` symbol ",")
-    sum
-    product
+    (pure . sum)
+    (pure . product)
+    []
     "inputs/day00.txt"
+    [ ( "visual", putStrLn "im a pretty command that u just ran" )
+    , ( "foo", putStrLn "im a different pretty command that u just ran" )
+    ]
+

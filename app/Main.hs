@@ -28,8 +28,8 @@ main = do
   cfg@Config{..} <- execParser opts
   case goal of
     All ->
-      for_ (zip [0..] days) $ \(i, d) -> elimSomeDay (runDay Nothing flags i) d
-    SpecificDay day fp ->
+      for_ (zip [0..] days) $ \(i, d) -> elimSomeDay (runDay Nothing Nothing flags i) d
+    SpecificDay day fp command ->
       case days ^? ix day of
         Nothing -> print ("Day" <+> pretty day <+> "not found" <> hardline)
-        Just (SomeDay v) -> runDay fp flags day v
+        Just (SomeDay v) -> runDay command fp flags day v
