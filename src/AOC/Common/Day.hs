@@ -15,6 +15,7 @@ import qualified Data.Text as Text
 import Data.Text.IO as Text
 import Control.Monad (when)
 import Control.Lens ((^?), ix)
+import System.Environment (withArgs)
 
 import Prettyprinter
 import Prettyprinter.Render.Terminal
@@ -66,7 +67,7 @@ runDay command maybeFile Flags{..} int day@Day{..} = do
         print =<< _solveTwo v
         putDoc hardline
 
-  runTests day
+  withArgs [] $ runTests day
 
   case command of
     Just cmd ->
@@ -81,15 +82,16 @@ runDay command maybeFile Flags{..} int day@Day{..} = do
           putDoc (annotate (color Red) "Command"
                   <+> annotate (color Yellow) (pretty cmd)
                   <+> annotate (color Red) "not found"
-                  <> hardline
-                  <> "Pick from"
+                  <> hardline)
+          when (length _extraCommands > 0) $
+            putDoc ("Pick from"
                   <+> (align
                       . sep
                       . zipWith (<>) (mempty : repeat ", ")
                       . fmap (annotate (color Yellow)
                               . pretty
                               . fst) $ _extraCommands)
-                  <> hardline <> hardline)
+                  <> hardline)
     Nothing ->
       pure ()
 

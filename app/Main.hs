@@ -26,6 +26,7 @@ days =
 main :: IO ()
 main = do
   cfg@Config{..} <- execParser opts
+  print cfg
   case goal of
     All ->
       for_ (zip [1..] days) $ \(i, d) -> elimSomeDay (runDay Nothing Nothing flags i) d
