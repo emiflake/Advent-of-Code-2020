@@ -24,7 +24,7 @@ data Day input a b =
   { _parseInput    :: Parser input
   , _solveOne      :: input -> IO a
   , _solveTwo      :: input -> IO b
-  , _tests         :: [SpecWith ()]
+  , _tests         :: SpecWith ()
   , _inputPath     :: FilePath
   , _extraCommands :: [(Text, IO ())]
   }
@@ -39,7 +39,7 @@ elimSomeDay f (SomeDay d) = f d
 
 runTests :: Day input a b -> IO ()
 runTests Day{..} =
-  hspec $ sequence_ _tests
+  hspec _tests
 
 parseInput :: Text -> Day input a b -> Either (ParseErrorBundle Text Void) input
 parseInput sourceInput Day{..} =
@@ -66,6 +66,8 @@ runDay command maybeFile Flags{..} int day@Day{..} = do
         print =<< _solveTwo v
         putDoc hardline
 
+  runTests day
+
   case command of
     Just cmd ->
       case lookup cmd _extraCommands of
@@ -91,16 +93,12 @@ runDay command maybeFile Flags{..} int day@Day{..} = do
     Nothing ->
       pure ()
 
-  when flagRunTests $
-    case _tests of
-      [] -> putDoc (annotate (color Black) "No tests to run" <> hardline)
-      _ -> runTests day
 
 day :: forall input a b. (Show input, Show a, Show b)
     => Parser input
     -> (input -> IO a)
     -> (input -> IO b)
-    -> [SpecWith ()]
+    -> SpecWith ()
     -> FilePath
     -> [(Text, IO ())]
     -> Day input a b
@@ -112,4 +110,4 @@ pureDay :: forall input a b. (Show input, Show a, Show b)
     -> (input -> b)
     -> FilePath
     -> Day input a b
-pureDay parse one two fp = Day parse (pure . one) (pure . two) [] fp []
+pureDay parse one two fp = Day parse (pure . one) (pure . two) (pure ()) fp []

@@ -3,7 +3,7 @@ module Main where
 
 import AOC.Common.Prelude hiding (Parser, option)
 import AOC.Common.Config
-import AOC.Day00 as Day00
+import AOC.Day01 as Day01
 
 import qualified Data.Text as Text
 import Data.Text (Text)
@@ -20,16 +20,16 @@ import Data.Semigroup ((<>))
 
 days :: [ SomeDay ]
 days =
-  [ SomeDay Day00.today 
-  , SomeDay Day00.today ]
+  [ SomeDay Day01.today
+  ]
 
 main :: IO ()
 main = do
   cfg@Config{..} <- execParser opts
   case goal of
     All ->
-      for_ (zip [0..] days) $ \(i, d) -> elimSomeDay (runDay Nothing Nothing flags i) d
+      for_ (zip [1..] days) $ \(i, d) -> elimSomeDay (runDay Nothing Nothing flags i) d
     SpecificDay day fp command ->
-      case days ^? ix day of
+      case days ^? ix (day - 1) of
         Nothing -> print ("Day" <+> pretty day <+> "not found" <> hardline)
         Just (SomeDay v) -> runDay command fp flags day v
