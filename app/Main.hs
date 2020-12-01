@@ -23,6 +23,12 @@ days =
   [ SomeDay Day01.today
   ]
 
+run :: Int -> IO ()
+run i =
+  case days ^? ix (i - 1) of
+    Nothing -> print ("Day" <+> pretty i <+> "not found" <> hardline)
+    Just (SomeDay v) -> runDay Nothing Nothing (Flags True True True) i v
+
 main :: IO ()
 main = do
   cfg@Config{..} <- execParser opts
