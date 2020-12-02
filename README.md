@@ -20,7 +20,9 @@ nix run github:emiflake/Advent-of-Code-2020#aoc2020 day 2 -f ./inputs/my-input.t
 
 ## Build/run it through stack
 ```sh
-stack run all```
+stack run all
+```
 or
 ```sh
-stack run day 1```
+stack run day 1
+```
