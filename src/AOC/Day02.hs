@@ -12,9 +12,9 @@ parser =
   let policy =
         Policy
         <$> ((,) <$> integer <* symbol "-" <*> integer)
-        <*> oneOf ['a'..'z']
-        <* symbol ":"
-        <*> many (oneOf ['a'..'z'])
+        <*> letterChar
+        <*  symbol ":"
+        <*> many letterChar
   in
   many (policy <* newline)
 

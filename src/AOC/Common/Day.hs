@@ -56,7 +56,7 @@ runDay command maybeFile Flags{..} int day@Day{..} = do
       print e
     Right v -> do
       putDoc (annotate (color Green) "Parsed input: " <> hardline)
-      print v
+      Prelude.putStrLn (take 80 (show v) <> "...")
       putDoc hardline
       when flagRunPartOne $ do
         putDoc (annotate (color Yellow) "Part one: " <> hardline)

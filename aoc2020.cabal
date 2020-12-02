@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 3c1ea9c20594b73d824e5a73cc39d1aac3ec4eb18b131be4221a41ab7c348683
+-- hash: 737a3b2c6f64ad14c6b0bde059b714f77c812ad00b564936ae1d401c89779765
 
 name:           aoc2020
 version:        0.1.0.0
@@ -26,6 +26,7 @@ source-repository head
 
 library
   exposed-modules:
+      AOC.Common.Algo
       AOC.Common.Config
       AOC.Common.Day
       AOC.Common.Parser
