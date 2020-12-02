@@ -4,6 +4,8 @@ module Main where
 import AOC.Common.Prelude hiding (Parser, option)
 import AOC.Common.Config
 import AOC.Day01 as Day01
+import AOC.Day02 as Day02
+import AOC.Day03 as Day03
 
 import qualified Data.Text as Text
 import Data.Text (Text)
@@ -21,6 +23,8 @@ import Data.Semigroup ((<>))
 days :: [ SomeDay ]
 days =
   [ SomeDay Day01.today
+  , SomeDay Day02.today
+  , SomeDay Day03.today
   ]
 
 run :: Int -> IO ()
