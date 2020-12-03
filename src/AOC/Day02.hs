@@ -29,10 +29,11 @@ one xs =
 two :: Input -> Int
 two xs =
   let
-    isValid (Policy (mi, ma) c cs) = (cs !! (mi - 1) == c) /= (cs !! (ma - 1) == c)
+    isValid (Policy (mi, ma) c cs) = (cs !! (mi - 1) == c)
+                                  /= (cs !! (ma - 1) == c)
   in
   length . filter isValid $ xs
-
+  
 tests :: SpecWith ()
 tests = pure ()
 

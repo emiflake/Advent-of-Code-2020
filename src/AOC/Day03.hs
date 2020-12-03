@@ -5,16 +5,29 @@ import AOC.Common.Prelude
 import Data.List
 import Data.Maybe
 
-type Input = [Int]
+type Input = [[Char]]
 
 parser :: Parser Input
-parser = many integer
+parser = many (many printChar <* newline)
+
+checkslope :: Input -> (Int, Int) -> Int
+checkslope xs (dx, dy) =
+  let yl = length xs `div` dy
+      xl = length (head xs)
+  in
+    length
+  . filter (\(x, y) -> (xs !! y) !! (x `mod` xl) == '#')
+  . take yl
+  . fmap (\i -> (dx * i, dy * i))
+  $ [0..]
 
 one :: Input -> Int
-one xs = sum xs
+one xs =
+  checkslope xs (3, 1)
 
 two :: Input -> Int
-two xs = product xs
+two xs = do
+  product $ fmap (checkslope xs) [ (1, 1), (3, 1), (5, 1), (7, 1), (1, 2) ]
 
 tests :: SpecWith ()
 tests = pure ()
@@ -26,7 +39,7 @@ commands :: [(Text, IO ())]
 commands =
   []
 
-today :: Day [Int] Int Int
+today :: Day Input Int Int
 today =
   day
     parser
