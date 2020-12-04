@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: ffaff470342403a716067d72b46b26c3e11990e9a6f90cdd762ae3951c924360
+-- hash: 358a0fc8a3ff1cd1ab21f48d7098499ec41f788daadf77efdfa562889f23c6c2
 
 name:           aoc2020
 version:        0.1.0.0
@@ -36,6 +36,7 @@ library
       AOC.Day02
       AOC.Day03
       AOC.Day04
+      AOC.Day05
   other-modules:
       Paths_aoc2020
   hs-source-dirs:
@@ -55,6 +56,7 @@ library
     , parser-combinators
     , prettyprinter ==1.7.*
     , prettyprinter-ansi-terminal
+    , regex-posix
     , text
     , transformers
     , vector
@@ -83,6 +85,7 @@ executable aoc2020-exe
     , parser-combinators
     , prettyprinter ==1.7.*
     , prettyprinter-ansi-terminal
+    , regex-posix
     , text
     , transformers
     , vector
@@ -112,6 +115,7 @@ test-suite aoc2020-test
     , parser-combinators
     , prettyprinter ==1.7.*
     , prettyprinter-ansi-terminal
+    , regex-posix
     , text
     , transformers
     , vector

@@ -53,7 +53,7 @@ runDay command maybeFile Flags{..} int day@Day{..} = do
   sourceInput <- Text.readFile (fromMaybe _inputPath maybeFile)
   case parseInput sourceInput day of
     Left e ->
-      print e
+      Prelude.putStrLn (errorBundlePretty e)
     Right v -> do
       putDoc (annotate (color Green) "Parsed input: " <> hardline)
       Prelude.putStrLn (take 80 (show v) <> "...")

@@ -28,6 +28,7 @@ dependencies:
 - ghc-prim
 - hspec
 - QuickCheck
+- regex-posix
 
 default-extensions:
 - OverloadedStrings
