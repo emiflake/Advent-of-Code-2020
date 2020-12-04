@@ -28,7 +28,7 @@ isValidField field value =
   let
     parseField =
       case field of
-        "byr" -> (\x -> x >= 1920 && x <= 2020) <$> integer
+        "byr" -> (\x -> x >= 1920 && x <= 2002) <$> integer
         "iyr" -> (\x -> x >= 2010 && x <= 2020) <$> integer
         "eyr" -> (\x -> x >= 2020 && x <= 2030) <$> integer
         "hgt" -> (\x unit -> (unit == "cm" && 150 <= x && x <= 193)
