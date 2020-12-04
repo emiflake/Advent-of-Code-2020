@@ -2,7 +2,6 @@ module AOC.Day04 where
 
 import AOC.Common.Prelude
 
-import Data.List
 import Data.Maybe
 import qualified Data.Text as Text
 
@@ -40,7 +39,7 @@ isValidField field value =
         _ -> pure True
   in
   case runMyParser (parseField <* eof) (Text.pack value) of
-    Left e -> False
+    Left _ -> False
     Right v -> v
 
 isValid :: [(String, String)] -> Bool
@@ -49,7 +48,6 @@ isValid passport =
 
 isValidCheckFields :: [(String, String)] -> Bool
 isValidCheckFields passport =
-  isValid passport &&
   all (\field -> maybe False (isValidField field) $ lookup field passport) requiredFields
 
 one :: Input -> Int
