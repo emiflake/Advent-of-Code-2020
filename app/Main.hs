@@ -7,10 +7,10 @@ import AOC.Day01 as Day01
 import AOC.Day02 as Day02
 import AOC.Day03 as Day03
 import AOC.Day04 as Day04
-
-import qualified Data.Text as Text
-import Data.Text (Text)
-import Text.Printf (printf)
+import AOC.Day05 as Day05
+import AOC.Day06 as Day06
+import AOC.Day07 as Day07
+import AOC.Day08 as Day08
 
 import Data.Foldable
 import Control.Lens ((^?), ix)
@@ -18,7 +18,6 @@ import Control.Lens ((^?), ix)
 import Prettyprinter
 
 import Options.Applicative
-import Data.Semigroup ((<>))
 
 
 days :: [ SomeDay ]
@@ -27,6 +26,10 @@ days =
   , SomeDay Day02.today
   , SomeDay Day03.today
   , SomeDay Day04.today
+  , SomeDay Day05.today
+  , SomeDay Day06.today
+  , SomeDay Day07.today
+  , SomeDay Day08.today
   ]
 
 run :: Int -> IO ()
@@ -37,7 +40,7 @@ run i =
 
 main :: IO ()
 main = do
-  cfg@Config{..} <- execParser opts
+  Config{..} <- execParser opts
   case goal of
     All ->
       for_ (zip [1..] days) $ \(i, d) -> elimSomeDay (runDay Nothing Nothing flags i) d

@@ -32,6 +32,7 @@ dependencies:
 
 default-extensions:
 - OverloadedStrings
+- PartialTypeSignatures
 
 library:
   source-dirs: src
@@ -44,6 +45,7 @@ executables:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
+    - -Wno-partial-type-signatures
     dependencies:
     - aoc2020
 
