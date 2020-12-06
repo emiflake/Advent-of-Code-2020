@@ -18,10 +18,22 @@ one =
 
 two :: Input -> Int
 two =
-  sum . map (Set.size . foldl1 Set.intersection . fmap Set.fromList)
+  sum . fmap (Set.size . foldl1 Set.intersection . fmap Set.fromList)
 
 tests :: SpecWith ()
-tests = pure ()
+tests =
+  describe "examples" $ do
+    let input =
+          [ [ "abc" ]
+          , [ "a" , "b" , "c"]
+          , [ "ab" , "ac"]
+          , [ "a" , "a" , "a" , "a"]
+          , [ "b" ]
+          ]
+    it "should pass part 1" $ do
+      one input `shouldBe` 11
+    it "should pass part 2" $ do
+      two input `shouldBe` 6
 
 inputFile :: FilePath
 inputFile = "inputs/day06.txt"
