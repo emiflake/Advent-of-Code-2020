@@ -3,14 +3,13 @@ module AOC.Day06 where
 import AOC.Common.Prelude
 
 import Data.List
-import Data.Maybe
 import qualified Data.Set as Set
 
 type Input = [[[Char]]]
 
 parser :: Parser Input
-parser = group `sepBy` newline
-  where group = many (some letterChar <* newline)
+parser = g `sepBy` newline
+  where g = many (some letterChar <* newline)
 
 one :: Input -> Int
 one =

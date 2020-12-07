@@ -14,6 +14,12 @@ bfs repr step ss = go Set.empty (Seq.fromList ss)
                              in h : go nSeen (t <> (Seq.fromList $ step h))
           go _ _ = error "Unreachable"
 
+traversal :: (a -> [a]) -> [a] -> [a]
+traversal step ss = go (Seq.fromList ss)
+    where go (Seq.viewl -> Seq.EmptyL) = []
+          go (Seq.viewl -> h :< t) = h : go (t <> (Seq.fromList $ step h))
+          go _ = error "Unreachable"
+
 dfs :: Ord r => (a -> r) -> (a -> [a]) -> [a] -> [a]
 dfs repr step ss = ss >>= go Set.empty
   where
