@@ -21,16 +21,14 @@
               src = ./.;
             };
           });
-        in {
-          aoc2020 = {
-            type = "app";
-            program =
-              "${drv.aoc2020.components.exes.aoc2020-exe}/bin/aoc2020-exe";
-          };
-        });
+        in { aoc2020 = drv.aoc2020.components.exes.aoc2020-exe; });
 
-      apps =
-        forAllSystems (system: { aoc = self.packages."${system}".aoc2020; });
+      apps = forAllSystems (system: {
+        aoc2020 = {
+          type = "app";
+          drv = "${self.packages."${system}".aoc2020}/bin/aoc2020-exe";
+        };
+      });
 
       defaultPackage =
         forAllSystems (system: self.packages."${system}".aoc2020);
