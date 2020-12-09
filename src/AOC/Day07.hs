@@ -28,7 +28,7 @@ parser = many rule
     contents =
       asum
       [ lexeme "no other bags" *> pure []
-      , ((,) <$> integer <* sc <*> color <* sc <* bag) `sepBy` (symbol ",")
+      , ((,) <$> natural <* sc <*> color <* sc <* bag) `sepBy` (symbol ",")
       ]
 
     rule =

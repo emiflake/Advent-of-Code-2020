@@ -27,12 +27,12 @@ isValidField field value =
   let
     parseField =
       case field of
-        "byr" -> (\x -> x >= 1920 && x <= 2002) <$> integer
-        "iyr" -> (\x -> x >= 2010 && x <= 2020) <$> integer
-        "eyr" -> (\x -> x >= 2020 && x <= 2030) <$> integer
+        "byr" -> (\x -> x >= 1920 && x <= 2002) <$> natural
+        "iyr" -> (\x -> x >= 2010 && x <= 2020) <$> natural
+        "eyr" -> (\x -> x >= 2020 && x <= 2030) <$> natural
         "hgt" -> (\x unit -> (unit == "cm" && 150 <= x && x <= 193)
                           || (unit == "in" && 59  <= x && x <= 76))
-                 <$> integer <*> (lexeme "cm" <|> lexeme "in")
+                 <$> natural <*> (lexeme "cm" <|> lexeme "in")
         "hcl" -> const True <$> (char '#' *> replicateM 6 hexDigitChar)
         "ecl" -> const True <$> asum [ "amb", "blu", "brn", "gry", "grn", "hzl", "oth" ]
         "pid" -> const True <$> replicateM 9 digitChar

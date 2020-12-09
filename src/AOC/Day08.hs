@@ -22,17 +22,12 @@ data Instruction
 
 parser :: Parser Input
 parser = many inst
-  where arg =
-          asum
-          [ "+" *> integer
-          , "-" *> (fmap negate integer)
-          ]
-
+  where 
         inst =
           asum
-          [ Acc <$ lexeme "acc" <*> arg
-          , Jmp <$ lexeme "jmp" <*> arg
-          , Nop <$ lexeme "nop" <*> arg
+          [ Acc <$ lexeme "acc" <*> integer
+          , Jmp <$ lexeme "jmp" <*> integer
+          , Nop <$ lexeme "nop" <*> integer
           ]
 
 runProgram :: Map Int Instruction -> Int
@@ -49,8 +44,8 @@ runProgram tape = go 0 0 Set.empty
             Nop _ ->
               go acc (loc + 1) (Set.insert loc seen)
 
-runProgramChecked :: Map Int Instruction -> Maybe [Int]
-runProgramChecked tape = go 0 0 Set.empty
+runProgramChecked :: Map Int Instruction -> Maybe Int
+runProgramChecked tape = last <$> go 0 0 Set.empty
   where
     go acc loc seen
       | loc `Set.member` seen = Nothing
@@ -84,7 +79,7 @@ one :: Input -> _
 one xs = runProgram . Map.fromList $ zip [0..] xs
 
 two :: Input -> _
-two xs = last . head . mapMaybe runProgramChecked . morphedPrograms . Map.fromList $ zip [0..] xs
+two xs = head . mapMaybe runProgramChecked . morphedPrograms . Map.fromList $ zip [0..] xs
 
 tests :: SpecWith ()
 tests = pure ()

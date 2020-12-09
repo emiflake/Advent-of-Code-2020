@@ -11,7 +11,7 @@ parser :: Parser Input
 parser =
   let policy =
         Policy
-        <$> ((,) <$> integer <* symbol "-" <*> integer)
+        <$> ((,) <$> natural <* symbol "-" <*> natural)
         <*> letterChar
         <*  symbol ":"
         <*> many letterChar
