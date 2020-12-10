@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 14d610632b74fa17270eaf00c837e4e9ab1c49afc121f33a07259b05a9523426
+-- hash: 12a04614f7c6b4019c88b86e41ed78e12fdbba738e05ec920e57e0f3c4267aa9
 
 name:           aoc2020
 version:        0.1.0.0
@@ -42,6 +42,7 @@ library
       AOC.Day08
       AOC.Day09
       AOC.Day10
+      AOC.Day11
   other-modules:
       Paths_aoc2020
   hs-source-dirs:
@@ -49,6 +50,7 @@ library
   default-extensions: OverloadedStrings PartialTypeSignatures
   build-depends:
       QuickCheck
+    , array
     , base >=4.7 && <5
     , containers
     , exceptions
@@ -78,6 +80,7 @@ executable aoc2020-exe
   build-depends:
       QuickCheck
     , aoc2020
+    , array
     , base >=4.7 && <5
     , containers
     , exceptions
@@ -108,6 +111,7 @@ test-suite aoc2020-test
   build-depends:
       QuickCheck
     , aoc2020
+    , array
     , base >=4.7 && <5
     , containers
     , exceptions

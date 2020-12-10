@@ -29,6 +29,7 @@ dependencies:
 - hspec
 - QuickCheck
 - regex-posix
+- array
 
 default-extensions:
 - OverloadedStrings
