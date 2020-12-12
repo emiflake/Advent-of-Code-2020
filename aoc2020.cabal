@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 12a04614f7c6b4019c88b86e41ed78e12fdbba738e05ec920e57e0f3c4267aa9
+-- hash: cc762cd33d321d825d552cae7c8db161d474592d888fe0f67c0cd84dd4664581
 
 name:           aoc2020
 version:        0.1.0.0
@@ -43,6 +43,8 @@ library
       AOC.Day09
       AOC.Day10
       AOC.Day11
+      AOC.Day12
+      AOC.Day13
   other-modules:
       Paths_aoc2020
   hs-source-dirs:
@@ -57,6 +59,7 @@ library
     , ghc-prim
     , hspec
     , lens
+    , linear
     , megaparsec
     , mtl
     , optparse-applicative
@@ -64,6 +67,7 @@ library
     , prettyprinter ==1.7.*
     , prettyprinter-ansi-terminal
     , regex-posix
+    , split
     , text
     , transformers
     , vector
@@ -87,6 +91,7 @@ executable aoc2020-exe
     , ghc-prim
     , hspec
     , lens
+    , linear
     , megaparsec
     , mtl
     , optparse-applicative
@@ -94,6 +99,7 @@ executable aoc2020-exe
     , prettyprinter ==1.7.*
     , prettyprinter-ansi-terminal
     , regex-posix
+    , split
     , text
     , transformers
     , vector
@@ -118,6 +124,7 @@ test-suite aoc2020-test
     , ghc-prim
     , hspec
     , lens
+    , linear
     , megaparsec
     , mtl
     , optparse-applicative
@@ -125,6 +132,7 @@ test-suite aoc2020-test
     , prettyprinter ==1.7.*
     , prettyprinter-ansi-terminal
     , regex-posix
+    , split
     , text
     , transformers
     , vector

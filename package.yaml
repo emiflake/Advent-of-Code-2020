@@ -30,6 +30,8 @@ dependencies:
 - QuickCheck
 - regex-posix
 - array
+- linear
+- split
 
 default-extensions:
 - OverloadedStrings
