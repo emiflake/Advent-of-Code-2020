@@ -25,8 +25,8 @@ stringLiteral = char '\"' *> (Text.pack <$> manyTill L.charLiteral (char '\"'))
 float :: Parser Double
 float = try (lexeme L.float) <|> lexeme L.decimal
 
-natural :: Parser Int
+natural :: Integral a => Parser a
 natural = lexeme L.decimal
 
-integer :: Parser Int
+integer :: Integral a => Parser a
 integer = L.signed mempty natural

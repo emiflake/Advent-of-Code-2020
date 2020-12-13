@@ -15,6 +15,7 @@ import AOC.Day09 as Day09
 import AOC.Day10 as Day10
 import AOC.Day11 as Day11
 import AOC.Day12 as Day12
+import AOC.Day13 as Day13
 
 import Data.Foldable
 import Control.Lens ((^?), ix)
@@ -38,6 +39,7 @@ days =
   , SomeDay Day10.today
   , SomeDay Day11.today
   , SomeDay Day12.today
+  , SomeDay Day13.today
   ]
 
 run :: Int -> IO ()
