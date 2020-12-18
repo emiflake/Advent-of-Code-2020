@@ -17,6 +17,10 @@ import AOC.Day11 as Day11
 import AOC.Day12 as Day12
 import AOC.Day13 as Day13
 import AOC.Day14 as Day14
+import AOC.Day15 as Day15
+import AOC.Day16 as Day16
+import AOC.Day17 as Day17
+import AOC.Day18 as Day18
 
 import Data.Foldable
 import Control.Lens ((^?), ix)
@@ -26,7 +30,7 @@ import Prettyprinter
 import Options.Applicative
 
 
-days :: [ SomeDay ]
+days :: [SomeDay]
 days =
   [ SomeDay Day01.today
   , SomeDay Day02.today
@@ -42,6 +46,10 @@ days =
   , SomeDay Day12.today
   , SomeDay Day13.today
   , SomeDay Day14.today
+  , SomeDay Day15.today
+  , SomeDay Day16.today
+  , SomeDay Day17.today
+  , SomeDay Day18.today
   ]
 
 run :: Int -> IO ()
